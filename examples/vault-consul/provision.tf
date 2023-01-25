@@ -142,7 +142,3 @@ module "consul-dns-forwarding-config" {
     "systemctl restart systemd-resolved",
   ]
 }
-
-output "config" {
-  value = local.config
-}
