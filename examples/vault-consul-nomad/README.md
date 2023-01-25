@@ -4,7 +4,9 @@ Deploy hashistack to VM using `terraform-null-template-sync`
 ```
 terraform init
 terraform apply
-# result
+```
+### Result
+```
 Apply complete! Resources: 0 added, 0 changed, 0 destroyed.
 
 Outputs:
