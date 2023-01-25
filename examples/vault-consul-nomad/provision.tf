@@ -1,5 +1,6 @@
 module "config_generator" {
-  source = "../../modules/config-generator"
+  source  = "nullc4t/template-sync/null//modules/config-generator"
+  version = ">= 0.1.0"
 
   input  = {
     nomad-client-prerequisites   = module.nomad-client-prerequisites
@@ -14,7 +15,8 @@ module "config_generator" {
 
 //noinspection HILUnresolvedReference
 module "config" {
-  source      = "../.."
+  source  = "nullc4t/template-sync/null"
+  version = ">= 0.1.0"
 
   for_each    = module.config_generator.config
   connection  = each.value.connection

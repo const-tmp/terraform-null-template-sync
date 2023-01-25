@@ -1,6 +1,7 @@
 //noinspection HILUnresolvedReference
 module "consul-agent-config" {
-  source     = "../../modules/factory"
+  source  = "nullc4t/template-sync/null//modules/factory"
+  version = ">= 0.1.0"
 
   for_each   = {
     for i in flatten([

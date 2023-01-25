@@ -3,7 +3,8 @@ Auto-updatable templates config generator
 ## Example
 ```
 module "vault-config" {
-  source     = "../../modules/factory"
+  source  = "nullc4t/template-sync/null//modules/factory"
+  version = ">= 0.1.0"
   
   for_each   = module.ec2.instances["vault"]
   
@@ -12,7 +13,8 @@ module "vault-config" {
 }
 
 module "config_generator" {
-  source = "../../modules/config-generator"
+  source  = "nullc4t/template-sync/null//modules/config-generator"
+  version = ">= 0.1.0"
 
   input  = {
     ...
@@ -24,7 +26,8 @@ module "config_generator" {
 }
 
 module "config" {
-  source      = "../.."
+  source  = "nullc4t/template-sync/null"
+  version = ">= 0.1.0"
 
   for_each    = module.config_generator.config
   
