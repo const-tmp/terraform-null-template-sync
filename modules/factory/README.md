@@ -1,2 +1,2 @@
 # terraform-null-template-sync-factory
-Auto-updatable templates generator
+Auto-updatable templates factory

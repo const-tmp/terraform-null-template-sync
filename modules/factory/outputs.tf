@@ -1,4 +1,4 @@
-output "data" {
+output "config" {
   description = "Generated config"
   value       = {
     name        = var.name
@@ -7,8 +7,8 @@ output "data" {
     exec_after  = var.exec_after
     template    = {
       source      = var.template.source
-      destination = var.template.destination
       data        = var.data
+      destination = var.template.destination
     }
   }
 }

@@ -3,6 +3,7 @@ locals {
     "${path.root}/../../../scripts/install-hashicorp.sh.tmpl",
     { packages : "vault consul" }
   )
+
   vault-consul-nomad = templatefile(
     "${path.root}/../../../scripts/install-hashicorp.sh.tmpl",
     { packages : "vault consul nomad" }
@@ -13,6 +14,7 @@ locals {
 module "ec2" {
   source       = "nullc4t/ec2/vultr"
   version      = ">= 0.0.2"
+
   region       = "waw"
   ssh_key_name = "ecdsa"
   os_id        = 1743
@@ -42,13 +44,5 @@ ${file("${path.root}/../../../scripts/install-docker.sh")}
 ${local.vault-consul-nomad}
 EOF
     }
-  }
-}
-
-output "instances" {
-  value = {
-    consul = {for label, data in module.ec2.instances["consul"] : label => "http://${data.public_ip}:8500"}
-    vault  = {for label, data in module.ec2.instances["vault"] : label => "http://${data.public_ip}:8200"}
-    nomad  = {for label, data in module.ec2.instances["nomad"] : label => "http://${data.public_ip}:4646"}
   }
 }
