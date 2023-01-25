@@ -1,6 +1,7 @@
 # terraform-null-template-sync
 Auto-updatable templates
 ## Example
+See [full example](https://github.com/nullc4t/terraform-null-template-sync/tree/main/examples/vault-consul-nomad)
 ```
 module "vault-config" {
   source  = "nullc4t/template-sync/null//modules/factory"
