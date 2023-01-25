@@ -12,7 +12,7 @@ locals {
 //noinspection MissingModule
 module "ec2" {
   source       = "nullc4t/ec2/vultr"
-  version      = ">= 0.0.1"
+  version      = ">= 0.0.2"
   region       = "waw"
   ssh_key_name = "ecdsa"
   os_id        = 1743
