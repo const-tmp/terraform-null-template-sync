@@ -10,6 +10,10 @@ locals {
   )
 }
 
+resource "vultr_vpc" "vpc" {
+  region = "waw"
+}
+
 //noinspection MissingModule
 module "ec2" {
   source       = "nullc4t/ec2/vultr"

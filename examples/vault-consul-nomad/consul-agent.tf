@@ -32,8 +32,8 @@ module "consul-agent-config" {
 
   data = {
     node_name  = each.key
-    retry_join = [for _, v in module.ec2.instances["consul"] : v.public_ip]
-    bind_addr  = each.value.public_ip
+    retry_join = [for _, v in module.ec2.instances["consul"] : v.private_ip]
+    bind_addr  = each.value.private_ip
     log_level  = upper("debug")
   }
 

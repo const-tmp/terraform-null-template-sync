@@ -60,8 +60,8 @@ module "nomad-client-config" {
 
   data = {
     name          = each.key
-    retry_join    = [for _, v in module.ec2.instances["nomad"] : v.public_ip]
-    bind_addr     = each.value.public_ip
+    retry_join    = [for _, v in module.ec2.instances["nomad"] : v.private_ip]
+    bind_addr     = each.value.private_ip
     vault_enabled = false
   }
 

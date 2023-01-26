@@ -24,11 +24,11 @@ module "nomad-config" {
   data = {
     name             = each.key
     bootstrap_expect = length(module.ec2.instances["nomad"])
-    retry_join       = [for _, v in module.ec2.instances["nomad"] : v.public_ip]
-    bind_addr        = each.value.public_ip
-    advertise_http   = each.value.public_ip
-    advertise_rpc    = each.value.public_ip
-    advertise_serf   = each.value.public_ip
+    retry_join       = [for _, v in module.ec2.instances["nomad"] : v.private_ip]
+    bind_addr        = each.value.private_ip
+    advertise_http   = each.value.private_ip
+    advertise_rpc    = each.value.private_ip
+    advertise_serf   = each.value.private_ip
     acl_enabled      = false
     vault_enabled    = false
     vault_token      = ""

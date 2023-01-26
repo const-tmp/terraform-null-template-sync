@@ -23,10 +23,10 @@ module "vault-config" {
 
   data = {
     node_id              = each.key
-    cluster_addr         = each.value.public_ip
-    api_addr             = each.value.public_ip
-    tcp_listener_address = each.value.public_ip
-    retry_join           = [for _, v in module.ec2.instances["vault"] : v.public_ip]
+    cluster_addr         = each.value.private_ip
+    api_addr             = each.value.private_ip
+    tcp_listener_address = each.value.private_ip
+    retry_join           = [for _, v in module.ec2.instances["vault"] : v.private_ip]
   }
 
   exec_after = [

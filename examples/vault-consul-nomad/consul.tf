@@ -24,8 +24,8 @@ module "consul-config" {
   data = {
     node_name        = each.key
     bootstrap_expect = length(module.ec2.instances["consul"])
-    retry_join       = [for _, v in module.ec2.instances["consul"] : v.public_ip]
-    bind_addr        = each.value.public_ip
+    retry_join       = [for _, v in module.ec2.instances["consul"] : v.private_ip]
+    bind_addr        = each.value.private_ip
     log_level        = upper("debug")
     acl_enabled      = false
     vault_enabled    = false
