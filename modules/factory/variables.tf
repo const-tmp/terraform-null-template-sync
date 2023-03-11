@@ -1,28 +1,17 @@
-//noinspection TFIncorrectVariableType
 variable "connection" {
   type = object({
     host        = string
     user        = optional(string, "root")
-    port        = optional(string, 22)
-    password    = string
-    private_key = string
-    agent       = bool
+    port        = optional(number, 22)
+    password    = optional(string)
+    private_key = optional(string)
+    agent       = optional(string)
   })
-}
-
-variable "name" {
-  description = "Unique descriptor"
-  type        = string
-}
-
-variable "data" {
-  description = "Data for template rendering"
-  type        = any
 }
 
 variable "template" {
   type = object({
-    source      = string
+    content     = string
     destination = string
   })
 }
@@ -30,9 +19,11 @@ variable "template" {
 variable "exec_before" {
   description = "Commands or scripts, running BEFORE sending template"
   type        = list(string)
+  default     = []
 }
 
 variable "exec_after" {
   description = "Commands or scripts, running AFTER sending template"
   type        = list(string)
+  default     = []
 }

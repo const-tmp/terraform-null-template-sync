@@ -1,15 +1,6 @@
-locals {
-  tmp = flatten([
-    for _, v in var.input : [
-      for label, data in v : {
-        id = data.config.name
-        data = data.config
-      }
-    ]
-  ])
-}
-
-output "config" {
+output "config_new" {
   description = "Generated config"
-  value       = {for i in local.tmp : i.id=>i.data}
+  value       = merge([for config_name, labels in var.input : {
+    for label, data in labels : "${config_name}-${label}" => data.config
+  }]...)
 }

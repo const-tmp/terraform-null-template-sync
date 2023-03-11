@@ -1,9 +1,9 @@
-locals {
-  file = templatefile(var.template.source, var.template.data)
-}
-
 resource "null_resource" "template-sync" {
-  triggers = { file = local.file }
+  triggers = {
+    exec_before = join("\n", var.exec_before)
+    file        = var.template.content
+    exec_after  = join("\n", var.exec_after)
+  }
 
   connection {
     type        = "ssh"
@@ -16,15 +16,15 @@ resource "null_resource" "template-sync" {
   }
 
   provisioner "remote-exec" {
-    inline = length(var.exec_before) > 0 ? var.exec_before : ["echo 'no commands in exec_before'"]
+    inline = length(var.exec_before) > 0 ? var.exec_before : ["echo 'no exec_before commands'"]
   }
 
   provisioner "file" {
-    content     = local.file
+    content     = var.template.content
     destination = var.template.destination
   }
 
   provisioner "remote-exec" {
-    inline = length(var.exec_after) > 0 ? var.exec_after : ["echo 'no commands in exec_after'"]
+    inline = length(var.exec_after) > 0 ? var.exec_after : ["echo 'no exec_after commands'"]
   }
 }
