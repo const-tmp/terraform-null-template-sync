@@ -11,7 +11,7 @@ variable "input" {
         agent       = bool
       })
       exec_before = list(string)
-      template    = map(string)
+      templates    = map(string)
       exec_after  = list(string)
     })
   })))
