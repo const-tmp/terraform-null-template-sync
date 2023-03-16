@@ -11,11 +11,8 @@ variable "input" {
         agent       = bool
       })
       exec_before = list(string)
-      template    = object({
-        content     = string
-        destination = string
-      })
-      exec_after = list(string)
+      template    = map(string)
+      exec_after  = list(string)
     })
   })))
 }

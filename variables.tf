@@ -1,8 +1,5 @@
-variable "template" {
-  type = object({
-    content     = string
-    destination = string
-  })
+variable "templates" {
+  type = map(string)
 }
 
 variable "connection" {
