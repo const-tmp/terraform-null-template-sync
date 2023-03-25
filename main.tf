@@ -1,6 +1,9 @@
 resource "null_resource" "exec-before" {
   triggers = merge(
-    { exec_before = join("\n", var.exec_before) },
+    {
+      exec_before = join("\n", var.exec_before)
+      exec_after  = join("\n", var.exec_after)
+    },
     {for k, v in var.templates : k => v},
   )
 
@@ -24,7 +27,13 @@ resource "null_resource" "template-sync" {
 
   for_each = var.templates
 
-  triggers = { "${each.key}" = each.value }
+  triggers = merge(
+    {
+      exec_before = join("\n", var.exec_before)
+      exec_after  = join("\n", var.exec_after)
+    },
+    {for k, v in var.templates : k => v},
+  )
 
   connection {
     type        = "ssh"
@@ -46,8 +55,11 @@ resource "null_resource" "exec-after" {
   depends_on = [null_resource.template-sync]
 
   triggers = merge(
+    {
+      exec_before = join("\n", var.exec_before)
+      exec_after  = join("\n", var.exec_after)
+    },
     {for k, v in var.templates : k => v},
-    { exec_after = join("\n", var.exec_after) },
   )
 
   connection {
